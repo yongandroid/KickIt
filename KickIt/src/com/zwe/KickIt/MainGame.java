@@ -1,13 +1,13 @@
 package com.zwe.KickIt;
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.zwe.KickIt.Screens.StartScreen;
 
-public class Game implements ApplicationListener {
+public class MainGame extends Game {
 	
 	@Override
 	public void create() {		
-		new StartScreen(this).show();
+		setScreen(new StartScreen(this));
 	}
 
 	@Override
@@ -15,7 +15,8 @@ public class Game implements ApplicationListener {
 	}
 
 	@Override
-	public void render() {		
+	public void render() {	
+		super.render();
 	}
 
 	@Override

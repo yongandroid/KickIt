@@ -10,10 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.zwe.KickIt.Game;
+import com.zwe.KickIt.MainGame;
 
 public class StartScreen implements Screen{
-	private Game game;
+	private MainGame game;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private BitmapFont font;
@@ -21,7 +21,7 @@ public class StartScreen implements Screen{
 	// Scene2D elements
 	private Stage stage;
 	
-	public StartScreen(Game game) {
+	public StartScreen(MainGame game) {
 		super();
 		this.game = game;
 	}
@@ -32,14 +32,14 @@ public class StartScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		Table.drawDebug(stage);
-		
+
 		stage.act(delta);
         stage.draw();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		//stage.setViewport(width, height, true);
+		stage.setViewport(width, height, true);
 	}
 
 	@Override
@@ -49,12 +49,11 @@ public class StartScreen implements Screen{
 		this.skin = new Skin(atlas);
 		this.font = new BitmapFont(Gdx.files.internal("data/fonts/mainFont.fnt"), false);
 		
-		
 		Gdx.input.setInputProcessor(stage);
 		
 		// generation of the table
 		Table table = new Table();
-		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		table.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		
 		// generation of the textbutton
 		TextButtonStyle tbs = new TextButtonStyle();
@@ -63,30 +62,22 @@ public class StartScreen implements Screen{
 		tbs.font = font;
 		
 		TextButton tb = new TextButton("Start game", tbs);
-		table.addActor(tb);
-		
+		table.add(tb).minWidth(Gdx.graphics.getWidth()/2);
 		table.debug();
 		
 		stage.addActor(table);
-		System.out.println("test");
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
