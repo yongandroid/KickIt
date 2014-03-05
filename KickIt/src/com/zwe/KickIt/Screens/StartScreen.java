@@ -45,7 +45,7 @@ public class StartScreen implements Screen{
 	@Override
 	public void show() {
 		this.stage = new Stage();
-		this.atlas = new TextureAtlas(Gdx.files.internal("data/textures/interface/interface.atlas"));
+		this.atlas = new TextureAtlas(Gdx.files.internal("data/textures/interface/interface.pack"));
 		this.skin = new Skin(atlas);
 		this.font = new BitmapFont(Gdx.files.internal("data/fonts/mainFont.fnt"), false);
 		
