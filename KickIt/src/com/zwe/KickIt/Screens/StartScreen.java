@@ -2,8 +2,11 @@ package com.zwe.KickIt.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -11,6 +14,9 @@ import com.zwe.KickIt.Game;
 
 public class StartScreen implements Screen{
 	private Game game;
+	private TextureAtlas atlas;
+	private Skin skin;
+	private BitmapFont font;
 	
 	// Scene2D elements
 	private Stage stage;
@@ -22,33 +28,47 @@ public class StartScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		stage.act(Gdx.graphics.getDeltaTime());
+		Table.drawDebug(stage);
+		
+		stage.act(delta);
         stage.draw();
-        
-        Table.drawDebug(stage);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		stage.setViewport(width, height, true);
+		//stage.setViewport(width, height, true);
 	}
 
 	@Override
 	public void show() {
 		this.stage = new Stage();
+		this.atlas = new TextureAtlas(Gdx.files.internal("data/textures/interface/interface.atlas"));
+		this.skin = new Skin(atlas);
+		this.font = new BitmapFont(Gdx.files.internal("data/fonts/mainFont.fnt"), false);
+		
+		
 		Gdx.input.setInputProcessor(stage);
 		
+		// generation of the table
 		Table table = new Table();
-		table.setFillParent(true);
+		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
-		TextButtonStyle tbs = new TextButtonStyle(up, down, checked, font);
+		// generation of the textbutton
+		TextButtonStyle tbs = new TextButtonStyle();
+		tbs.up = skin.getDrawable("button_normal");
+		tbs.down = skin.getDrawable("button_clicked");
+		tbs.font = font;
+		
 		TextButton tb = new TextButton("Start game", tbs);
 		table.addActor(tb);
 		
+		table.debug();
+		
 		stage.addActor(table);
+		System.out.println("test");
 	}
 
 	@Override

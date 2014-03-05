@@ -7,7 +7,7 @@ public class Game implements ApplicationListener {
 	
 	@Override
 	public void create() {		
-		new StartScreen(this);
+		new StartScreen(this).show();
 	}
 
 	@Override
