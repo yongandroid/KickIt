@@ -1,13 +1,13 @@
 package com.zwe.KickIt;
 
 import com.badlogic.gdx.Game;
-import com.zwe.KickIt.Screens.StartScreen;
+import com.zwe.KickIt.Screens.GameScreen;
 
 public class MainGame extends Game {
 	
 	@Override
 	public void create() {		
-		setScreen(new StartScreen(this));
+		setScreen(new GameScreen(this));
 	}
 
 	@Override
